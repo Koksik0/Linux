@@ -1,0 +1,78 @@
+========================================================================
+Autor: Paweł Wacławik,                               Krakow, 08.06.2022
+========================================================================
+
+* Zawartosc:
+============
+--------------------------------------------------------------------
+
+I.  Program main.c za pomocą fork() i excelp() wywołuje koncument.c i producent.c. 
+    Tworzy semafory i pamięć dzieloną.
+II. Plik semafory.c i semafory.h, pamiecDzielona.c pamiecDzielona.h to pliki odpowiadające za bibliotekę.
+
+* Jak uruchomic programy:
+====================================================================
+
+Katalog zawiera program Makefile do kompilacji, linkowania
+i uruchamiania powyzszych programow, a takze czyszczenia katalogu 
+i jego archiwizacji.
+
+-> Aby uruchomic program należy wpisać make run.
+
+---> Dla pewnosci, ze wykonywane sa polecenia zdefiniowane w Makefile,
+     a nie wbudowane polecenia make'a, uzyc opcji -r, np.
+       make -r run1
+ 
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+       make clean
+
+-> W celu archiwizacji oraz kompresji katalogu nalezy wykonac:
+       make tar
+
+========================================================================
+
+
+
+
+Pseudokod
+
+
+#define N ?                        // Rozmiar bufora
+    typdef struct { ... } Towar;     // Definicja typu dla jednostek towaru
+    Towar bufor[N];                    // Bufor mogacy pomiescic N jednostek towaru
+    int wstaw = 0, wyjmij = 0;        // Pozycje wstawiania oraz wyjmowania towaru
+                                    // z bufora
+
+    semaphore PROD = N;                // Semafor do wstrzymywania Producenta
+    semaphore KONS = 0;                // Semafor do wstrzymywania Konsumenta
+
+->    binary semaphore bPROD = 1;        // Semafor binarny do synchronizacji wielu
+                                    // producentow
+->    binary semaphore bKONS = 1;        // Semafor binarny do synchronizacji wielu
+                                    // konsumentow
+
+    // Proces Producent
+    // ----------------
+    Towar towarProd;
+    while (1) {
+    // Produkcja towaru
+->    P(bPROD);                        // Opusc semafor binarny producentow
+    P(PROD);                        // Opusc semafor Producenta
+    bufor[wstaw] = towarProd;        // Umiesc towar w buforze
+    wstaw = (wstaw + 1) % N;        // Przesun pozycje wstawiania o 1 dalej
+    V(KONS);                        // Podniesc semafor Konsumenta
+->    V(bPROD);                        // Podniesc semafor binarny producentow
+    }
+
+    // Proces Konsument
+    // ----------------
+    Towar towarKons;
+    while (1) {
+->    P(bKONS);                        // Opusc semafor binarny konsumentow
+    P(KONS);                        // Opusc semafor Konsumenta
+    towarKons = bufor[wyjmij];        // Umiesc towar w buforze
+    wyjmij = (wyjmij + 1) % N;        // Przesun pozycje wstawiania o 1 dalej
+    V(PROD);                        // Podniesc semafor Producenta
+->    V(bKONS);                        // Podniesc semafor binarny konsumentow
+    // Konsumpcja towaru
+    }
