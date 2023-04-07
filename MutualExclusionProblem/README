@@ -1,0 +1,33 @@
+========================================================================
+Autor: Paweł Wacławik,                               Krakow, 01.06.2022
+========================================================================
+
+* Zawartosc:
+============
+--------------------------------------------------------------------
+
+I.  Program powielacz.c za pomocą fork() i excelp() realizuje wzajemne wykluczanie procesów. 
+    Tworzy semafor i go inicjuje.
+II. Plik semafory.c i semafory.h to pliki odpowiadające za bibliotekę.
+III. Plik wzajemneWykluczanie.c odpowiada za inkrementowanie wartości w pliku, a także za wypisywanie odpowiednich komunikatów.
+
+* Jak uruchomic programy:
+====================================================================
+
+Katalog zawiera program Makefile do kompilacji, linkowania
+i uruchamiania powyzszych programow, a takze czyszczenia katalogu 
+i jego archiwizacji.
+
+-> Aby uruchomic program należy wpisać make run.
+
+---> Dla pewnosci, ze wykonywane sa polecenia zdefiniowane w Makefile,
+     a nie wbudowane polecenia make'a, uzyc opcji -r, np.
+       make -r run1
+ 
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+       make clean
+
+-> W celu archiwizacji oraz kompresji katalogu nalezy wykonac:
+       make tar
+
+========================================================================
