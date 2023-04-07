@@ -1,0 +1,36 @@
+========================================================================
+Autor: Paweł Wacławik,                               Krakow, 22.03.2022
+========================================================================
+
+* Zawartosc:
+============
+--------------------------------------------------------------------
+I.	Pierwszy program wypisuje identyfikator procesu macierzystego, a także wywołuje za pomocą funkcji excelp program drugi. Program składa się z:
+  1) zadanie1.c - program glowny.
+  
+II.  Drugi program wypisuję identyfikatory UID, GID, PID, PPID i PGID dla danego procesu.
+    Program składa się z:
+    1) zadanie2.c - program glowny.
+
+------------------------------------------------------------------------
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji, linkowania
+i uruchamiania powyzszych programow, a takze czyszczenia katalogu 
+i jego archiwizacji.
+
+-> Aby uruchomic program należy wpisać make run1. 
+
+---> Dla pewnosci, ze wykonywane sa polecenia zdefiniowane w Makefile,
+     a nie wbudowane polecenia make'a, uzyc opcji -r, np.
+       make -r run1
+ 
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+       make clean
+
+-> W celu archiwizacji oraz kompresji katalogu nalezy wykonac:
+       make tar
+
+========================================================================
