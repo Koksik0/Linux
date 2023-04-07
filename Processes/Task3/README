@@ -1,0 +1,40 @@
+========================================================================
+Autor: Paweł Wacławik,                               Krakow, 30.03.2022
+========================================================================
+
+* Zawartosc:
+============
+--------------------------------------------------------------------
+
+I.  Pierwszy program obsługuję sygnały, gdzie 1 - wykonanie operacji domyślnej, 2- ignorowanie oraz 3 - własnej obsługi. Program sklada sie z: 
+    1) zadanie1.c - program glowny. 
+
+II. Drugi program wywołuję program z podpunktu pierwszwgo za pomocą funkcji excelp() z poziomu procesu potomnego. Z procesu macierzystego jest wysyłany sygnał.
+    Program sklada sie z:    
+    1) zadanie2.c - program glowny.
+    2) zadanie1.c - drugi program.
+III. W trzecim programie tworzymy proces potomny w którym uruchamamy program, który ustawia ignorowanie sygnału i staje się liderem grupy.Następnie tworzymy w nim kilka procesów potomnych, w których wywołujemy program z podpunktu pierwszego.  Program sklada sie z:    
+    1) zadanie3.c - program glowny.
+    2) zadanie4.c - drugi program.
+    3) zadanie1.c - trzeci program.
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji, linkowania
+i uruchamiania powyzszych programow, a takze czyszczenia katalogu 
+i jego archiwizacji.
+
+-> Aby uruchomic programy należy wpisać make run#, gdzie za # wstawiamy liczbę z przedziału 1-3, które kolejno odpowiadają numerom programów.
+
+---> Dla pewnosci, ze wykonywane sa polecenia zdefiniowane w Makefile,
+     a nie wbudowane polecenia make'a, uzyc opcji -r, np.
+       make -r run1
+ 
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+       make clean
+
+-> W celu archiwizacji oraz kompresji katalogu nalezy wykonac:
+       make tar
+
+========================================================================
