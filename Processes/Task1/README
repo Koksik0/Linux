@@ -5,7 +5,7 @@ Autor: Paweł Wacławik,                               Krakow, 15.03.2022
 * Zawartosc:
 ============
 
-Katalog zadanie zawiera pięć programów napisanych w języku C:
+
 --------------------------------------------------------------------
 
 I.  Pierwszy program wypisuję identyfikatory UID, GID, PID, PPID i PGID dla danego procesu.
